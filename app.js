@@ -2,73 +2,27 @@ const express = require ('express');
 const app = express();
 
 
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
 
-
-
-/* const graphql,{GraphQLObjectType,GraphQLSchema,GraphQLInt,GraphQLString,GraphQLList, GraphQLInt} = require('graphql');
-const {graphqlHTTP}  = require('express-graphql');
-
-
-
-const UserType = new GraphQLObjectType ({
-  name : "store",
-  fields: () => ({
-    id : {type: GraphQLInt},
-    name  : { type : GraphQLString},
-    address  : { type : GraphQLString},
-    number  : { type : GraphQLInt},
-    email  : { type : GraphQLString}
-  })
-})
-
-
-
-const RootQuery = new GraphQLObjectType({
-  name: "RootQueryType",
-  fields:{
-    getAllUsers : {
-      type: new GraphQLList(UserType),
-      args: {id : { type: GraphQLInt}},
-      resolve(parent,args){
-        return userData
-      }
-    }
-  }
-})
-const Mutation  = new GraphQLObjectType({
-  name: "Mutation",
-  fields:{
-    createUser : {
-      type: UserType,
-      args: {
-        name  : { type : GraphQLString},
-        address  : { type : GraphQLString},
-        number  : { type : GraphQLInt},
-        email  : { type : GraphQLString}
-      } ,
-      resolve(parent,args){
-
-      }
-    }
-  }
-})
-
-const schema  = new GraphQLSchema({
-  query: RootQuery,
-  mutation: Mutation
-})
-
-
-app.use('/graphql' , graphqlHTTP({
-  schema ,
-  graphiql: true
-}))
- */
-
+app.set("view engine","ejs");
 
 
 app.get('/',(req,res)=>{
-  res.send('HOME');
+  res.render('stores',{
+    stores:[
+      {name:'abc',number:981,email:'abc@mail.com',address:'delhi'},
+      {name:'def',number:982,email:'def@mail.com',address:'delhi'},
+    ]
+  });
+})
+
+app.get('/add',(req,res)=>{
+  res.render('storeAdd');
+})
+
+app.post('/add',(req,res)=>{
+  
 })
 
 app.listen(3000,() => {

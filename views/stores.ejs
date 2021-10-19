@@ -20,13 +20,14 @@
         <th scope="col">Email</th>
         <th scope="col">Invoice</th>
       </tr>
+      
       <% for(let store of stores){ %> 
         <tr scope="row">
-          <td><%= store.name  %> </td>
-          <td colspan="2"><%= store.address %> </td>
-          <td><%= store.number %> </td>
-          <td><%= store.email %> </td>
-          <td> <a class="btn btn-primary" href="/<%=store.id%>"><%= store.name%></a></td>
+          <td><%=store.NAME%> </td>
+          <td colspan="2"><%= store.ADDRESS %> </td>
+          <td><%= store.NUMBER %> </td>
+          <td><%= store.EMAIL %> </td>
+          <td> <a class="btn btn-primary" href="/<%=store.id%>"><%= store.NAME%></a></td>
         </tr>
       <% } %> 
     </table>

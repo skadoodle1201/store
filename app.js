@@ -1,5 +1,6 @@
 const express = require ('express');
 const app = express();
+const db = require('./db')
 
 
 app.use(express.json());
@@ -9,20 +10,28 @@ app.set("view engine","ejs");
 
 
 app.get('/',(req,res)=>{
-  res.render('stores',{
-    stores:[
-      {name:'abc',number:981,email:'abc@mail.com',address:'delhi'},
-      {name:'def',number:982,email:'def@mail.com',address:'delhi'},
-    ]
-  });
+  db.getAllStores()
+  .then((stores)=>{
+    res.render('stores',{stores})
+  })
+  .catch((err)=>{
+    res.send(err)
+  })
 })
 
 app.get('/add',(req,res)=>{
-  res.render('storeAdd');
+  res.render('storeAdd')
 })
 
 app.post('/add',(req,res)=>{
-  
+  console.log(req.body.NAME);
+  db.addNewStore(req.body.NAME, req.body.NUMBER, req.body.ADDRESS, req.body.EMAIL)
+  .then(()=>{
+    res.redirect('/')
+  })
+  .catch((err)=>{
+    res.send(err)
+  })
 })
 
 app.listen(3000,() => {

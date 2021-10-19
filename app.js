@@ -24,7 +24,7 @@ app.get('/add',(req,res)=>{
 })
 
 app.post('/add',(req,res)=>{
-  console.log(req.body.NAME);
+
   db.addNewStore(req.body.NAME, req.body.NUMBER, req.body.ADDRESS, req.body.EMAIL)
   .then(()=>{
     res.redirect('/')
